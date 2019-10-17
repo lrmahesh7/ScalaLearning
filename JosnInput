@@ -1,0 +1,74 @@
+{process_name": "di_amp_subscription_state_opr_bs",
+	"process_type": "",
+	"spark_master": "yarn",
+	"spark_deploy_mode": null,
+	"spark_process_name": "batch_sprayer",
+	"spark_main_class_name": "DagMain.scala",
+	"number_of_executors": "5",
+	"memory_of_executors": "2G",
+	"external_jars_path": "hdfs://example",
+	"active_indicator": true,
+	"input_frequency": 3600,
+	"proc_frequency": 3600,
+	"output_frequency": 3600,
+	"input_read_window": 3600,
+	"input_proc_window": 3600,
+	"input_proc_window": 3600,
+	"spraying_columns": [{
+		"name": "NA",
+		"format": "NA"
+	}],"input_tables": [{
+		"tableName":"sourceTableName",
+		"dbName": "dbName",
+		"tablePath": "",
+		"partitions": [{
+			"name": "NA",
+			"is_time_partition": true,
+			"format": "yyyyMMddHHmmss"
+		}],
+		"columns": [{
+			"name": "batch_id",
+			"columnType": null,
+			"isAdditive": true
+		}],
+		"filterColumn": "NA"
+	}],"output_tables": [{
+		"tableName": "targetTableName",
+		"dbName": "dbName",
+		"tablePath": "",
+		"partitions": [{
+			"name": "NA",
+			"is_time_partition": true,
+			"format": "yyyyMMddHHmmss"
+		}, {
+			"name": "NA",
+			"is_time_partition": true,
+			"format": "yyyyMMddHHmmss"
+		}],
+		"columns": [{
+			"name": "batch_id",
+			"columnType": null,
+			"isAdditive": true
+		}],
+		"filter_column": "NA"
+	}],"transformation": [{
+		"transformation_type": "map",
+		"src_column": "batch_id",
+		"dst_column": "batch_id",
+		"function": "",
+		"default": ""
+	}],
+	"formatOfRuntime": null,
+	"formatOfBatchtime": null,
+	"standardDatetimeFormat": null,
+	"standardDateFormat": null,
+	"tmpTables": null,
+	"numOfDaysBackForBatchtime": 10,
+	"batchJournalTimeMin": null,
+	"percentFormat": null,
+	"nonAdditiveFunc": null,
+	"successCriteriaFunc": null,
+	"logName": ,
+	"logPath": "/ngs/app/edwaeaat/",
+	"logPatternLayout": null
+}
