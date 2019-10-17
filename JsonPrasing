@@ -1,0 +1,56 @@
+import org.json4s.DefaultFormats
+import org.json4s.jackson.JsonMethods._
+
+class JsonParser {
+
+def configObjectParser(jsonString: String): ConfigObject = {
+    implicit val formats = DefaultFormats
+    var configObject = new ConfigObject
+    //println(jsonString)
+
+    try{
+      configObject = parse(jsonString).transformField {
+        case ("process_name", value) => ("processName", value)
+      
+        
+        //case x => x
+      }.extract[ConfigObject]
+      configObject
+    }
+    catch{
+      case jsonFormat: com.fasterxml.jackson.core.JsonParseException =>  {throw new ConfigParsingException((jsonFormat.getMessage()))}
+      case e: Exception => {throw new ConfigParsingException((e.getMessage()))}
+    }
+    }}
+    
+    case class ConfigObject(processName: String = null,
+                        processType: String = null,
+                        
+                        inputFrequency: Long = -1L,
+                      
+                        sprayingColumns: List[SpraySpec] = null,
+                        inputTables: List[TableSpec] = null,
+                        outputTables: List[TableSpec] = null,
+                        transformation: List[TransformationSpec] = null,
+
+                        /* added for rule evalutor start */
+                        formatOfRuntime: String = "yyyyMMddHHmm",
+                        formatOfBatchtime: String = "yyyyMMddHHmm",
+                        standardDatetimeFormat: String = "yyyy-MM-dd HH:mm",
+                        standardDateFormat: String = "yyyy-MM-dd",
+                        tmpTables: List[String] = null,
+                        numOfDaysBackForBatchtime: Int = 10,
+                        batchJournalTimeMin: String = null,
+                        percentFormat: String = "%.2f",
+                        nonAdditiveFunc: String = null,
+                        successCriteriaFunc: String = null,
+                        logName: String = null,
+                        logPath: String = null,
+                        logPatternLayout: String = null
+                        /* added for rule evalutor end */) {
+
+  override def toString =
+    s"processName: $processName," +
+    
+    s" logPatternLayout: $logPatternLayout"
+}
